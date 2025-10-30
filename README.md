@@ -11,5 +11,5 @@
 - Python (Manim)
 
 
-## Videos
+## Videos showcase
 [Microeconomics - DWL](https://youtube.com/shorts/v_5JES05H0k)
