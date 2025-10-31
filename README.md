@@ -12,5 +12,5 @@
 
 
 ## Videos showcase
-[Linear Regression - OLS](https://youtube.com/shorts/A9T6CDfl3vI?feature=share)
+[Linear Regression - OLS](https://youtube.com/shorts/A9T6CDfl3vI?feature=share)  
 [Microeconomics - DWL](https://youtube.com/shorts/v_5JES05H0k)
