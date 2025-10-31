@@ -48,7 +48,7 @@ class LinearR(Scene):
         first_t = Text("Imagine you have 2 variables:\nprice and size of a house")
         first_t.font_size = f_size
         first_t.set_color_by_gradient(RED, BLUE)
-        first_t.to_edge(UP)
+        first_t.to_edge(UP, buff = 0.8)
 
         
         table_data = [["Price ($)", "Size (m²)"]]
@@ -84,7 +84,7 @@ class LinearR(Scene):
         sec_t = Text("We can see that price rises as size rises")
         sec_t.font_size = f_size
         sec_t.set_color_by_gradient(TEAL, BLUE)
-        sec_t.to_edge(UP)
+        sec_t.to_edge(UP, buff = 0.8)
 
         ax1 = Axes(
             x_range=[40, 190, 20],
@@ -129,7 +129,7 @@ class LinearR(Scene):
         third_t = Text("We can try to approximate\nthis relationship\nwith lines of different slopes", t2c={"lines": RED})
         third_t.font_size = f_size
         third_t.set_color_by_gradient(TEAL, RED)
-        third_t.to_edge(UP)
+        third_t.to_edge(UP, buff = 0.8)
         
         self.play(Unwrite(sec_t))
 
@@ -175,7 +175,7 @@ class LinearR(Scene):
         fourth_t = Text("Or different shifts along y axis")
         fourth_t.font_size = f_size
         fourth_t.set_color_by_gradient(RED, TEAL)
-        fourth_t.to_edge(UP)
+        fourth_t.to_edge(UP, buff = 0.8)
 
         start4 = ax1.c2p(x0, y0 + 60_000)
         end4 = ax1.c2p(x1, y1 - 100_000 + 60_000)
@@ -203,10 +203,10 @@ class LinearR(Scene):
         )
 
 
-        fifth_t = Text("The distance from each data point\nrepresents line's error.")
+        fifth_t = Text("The distance from each data point\nrepresents line's error")
         fifth_t.font_size = f_size
         fifth_t.set_color_by_gradient(TEAL, YELLOW)
-        fifth_t.to_edge(UP)
+        fifth_t.to_edge(UP, buff = 0.8)
 
 
         def create_error_bars_from_line(line_obj):
@@ -254,7 +254,7 @@ class LinearR(Scene):
         sixth_t = Text("We take each distance\nin square to eliminate signs")
         sixth_t.font_size = f_size
         sixth_t.set_color_by_gradient(TEAL, YELLOW)
-        sixth_t.to_edge(UP)
+        sixth_t.to_edge(UP, buff = 0.8)
 
 
         self.play(Unwrite(fifth_t)) 
@@ -271,7 +271,7 @@ class LinearR(Scene):
 
         seventh_t = Text("The line which creates\nthe least sum of those squares (OLS)\nis our regression line", color=TEAL, t2c={"those squares": YELLOW, "regression line": RED})
         seventh_t.font_size = f_size
-        seventh_t.to_edge(UP)
+        seventh_t.to_edge(UP, buff = 0.8)
 
         x = data['size'].astype(float)
         y = data['price'].astype(float)
