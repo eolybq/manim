@@ -3,7 +3,6 @@ from manim import *
 class Outro(Scene):
     def construct(self):
         # OUTRO
-        self.camera.frame.scale(1) 
 
         # DOPLNIT "..." ZA VSECHNY KONECNE OBJEKTY
         fin_group = VGroup(...)
