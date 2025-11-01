@@ -2,6 +2,13 @@ from manim import *
 
 class Lagrange(MovingCameraScene):
     def construct(self):
+        # ---SHORTS POTREBUJI THUMBNAIL PRIMO VE VIDEU---
+        # img = ImageMobject("media/images/thumbnail/thumbnail.png")
+        # img.scale(0.6)
+        # self.add(img)
+        # self.wait(0.1)
+        # self.remove(img)
+        
         self.camera.frame_width = 9
         self.camera.frame_height = 16
         ax1 = Axes(
@@ -11,13 +18,14 @@ class Lagrange(MovingCameraScene):
             x_length=8,
             y_length=6,
             axis_config={"include_numbers": True},
-        )
+        ).set_color_by_gradient(BLUE,TEAL)
 
-        text_uvod = Text("Lagrange Interpolation", font_size=48)
+        text_uvod = Text("Lagrange Interpolation")
+        text_uvod.set_color_by_gradient(TEAL, PURPLE)
         text_uvod.scale(0.5)
         text_im = Text("Imagine you are given n points from a function.\n How would you approximate the function?",t2c={" n ": GREEN}, font_size=28).to_edge(UP).shift(UP*3)
         text_le = Text("For this, we can use a tool called Lagrange\nInterpolation, constructing Lagrange Polynomial", font_size=28, t2c={"Lagrange\nInterpolation": BLUE, "Lagrange Polynomial": RED}).to_edge(UP).shift(UP*3)
-        text_hu = Text("Let's see how it works").to_edge(UP).shift(UP*3)
+        text_hu = Text("Let's see how it works").to_edge(UP).shift(UP*3).set_color_by_gradient(RED, BLUE)
 
         self.play(Write(text_uvod))
         self.play(text_uvod.animate.scale(1.5))
@@ -34,10 +42,15 @@ class Lagrange(MovingCameraScene):
         self.play(FadeOut(text_im))
         self.wait(1)
 
-        self.play(Write(text_le))
         self.wait(1)
-        polynom_showcase = ax1.plot(lambda x: 0.5833*x**4 - 4.6663*x**3 + 11.9154*x**2 - 9.8316*x + 1.9992, x_range=[0,4], color=RED)
-        self.play(Create(polynom_showcase))
+        polynom_showcase = ax1.plot(lambda x: 0.5833*x**4 - 4.6663*x**3 + 11.9154*x**2 - 9.8316*x + 1.9992, x_range=[0,4]).set_color_by_gradient(RED, PINK, BLUE)
+        self.play(
+            AnimationGroup(
+                Write(text_le),
+                Create(polynom_showcase),
+                lag_ratio=0.5
+            )
+        )
         self.play(FadeOut(text_le))
         self.play(Write(text_hu))
 
@@ -46,11 +59,11 @@ class Lagrange(MovingCameraScene):
         self.play(self.camera.frame.animate.shift(RIGHT*10))
         self.play(self.camera.frame.animate.scale(2/3))
 
-        text_fp = Text("We will need a specific polynomial for every point.", font_size=28).move_to(self.camera.frame.get_center() + UP*6.3)
+        text_fp = Text("We will need a specific polynomial for every point.", font_size=28).move_to(self.camera.frame.get_center() + UP*6.3).set_color_by_gradient(BLUE,TEAL)
         text_tp = Text("This polynomial returns the value 1 at its\n corresponding point and 0 at all other points:",t2c={"1": RED, "0": BLUE}, font_size=28).next_to(text_fp, DOWN, buff=2)
         formula = MathTex(r"L_i(x_j) = \begin{cases} 1, & \text{if } j = i \\ 0, & \text{if } j \neq i \end{cases}",font_size=50).next_to(text_tp, DOWN, buff=1.2)
         text_vy = Text("That means:",
-            font_size=28).next_to(formula, DOWN, buff=0.8)
+            font_size=28).next_to(formula, DOWN, buff=0.8).set_color_by_gradient(YELLOW,TEAL)
         text_math = MathTex(r"(x-x_0)\dots(x-x_{i-1})(x-x_{i+1})\dots(x-x_n) = 0",font_size=40).next_to(text_vy, DOWN, buff=0.8)
 
 
@@ -61,7 +74,7 @@ class Lagrange(MovingCameraScene):
             x_length=8,
             y_length=6,
             axis_config={"include_numbers": True}
-        )
+        ).set_color_by_gradient(BLUE,TEAL)
         ax2.move_to(self.camera.frame.get_center())
         dot21, dot22, dot23, dot24, dot25 = Dot(ax2.c2p(0,2), color=RED), Dot(ax2.c2p(1,0), color=YELLOW), Dot(ax2.c2p(2,2), color=PINK), Dot(ax2.c2p(3,1), color=GREEN), Dot(ax2.c2p(4,4), color=BLUE)
         self.play(Write(text_fp))
@@ -86,7 +99,7 @@ class Lagrange(MovingCameraScene):
 
         P = lambda x: 2*L0(x) + 0*L1(x) + 2*L2(x) + 1*L3(x) + 4*L4(x)
 
-        text_ex = Text("Let's see how this looks for our first point:", font_size=28).move_to(self.camera.frame.get_center() + UP*6.3)
+        text_ex = Text("Let's see how this looks for our first point:", font_size=28).move_to(self.camera.frame.get_center() + UP*6.3).set_color_by_gradient(RED, TEAL)
 
         formula_L0_raw = MathTex(
         r"L_0(x) = (x-1)(x-2)(x-3)(x-4)",
@@ -120,7 +133,7 @@ class Lagrange(MovingCameraScene):
             x_length=8,
             y_length=6,
             axis_config={"include_numbers": True},
-        )
+        ).set_color_by_gradient(BLUE,TEAL)
         ax3.move_to(self.camera.frame.get_center(), UP * 0.65)
 
         self.play(Write(text_ex))
@@ -168,7 +181,7 @@ class Lagrange(MovingCameraScene):
         self.wait(0.5)
 
         # Text o součtu
-        sum_text = Text("Now we sum them up to get the polynomial:", font_size=28).next_to(dots, DOWN, buff=0.8)
+        sum_text = Text("Now we sum them up to get the polynomial:", font_size=28).next_to(dots, DOWN, buff=0.8).set_color_by_gradient(RED, PINK, BLUE)
         self.play(Write(sum_text))
 
         # Obecný vzorec pro Lagrangeův polynom
@@ -189,8 +202,39 @@ class Lagrange(MovingCameraScene):
         self.play(Create(L1_l),Create(L2_l),Create(L3_l),Create(L4_l))
         self.wait(1)
 
-        P_final = ax3.plot(P, x_range=[0,4.3])
+        P_final = ax3.plot(P, x_range=[0,4.05]).set_color_by_gradient(RED, PINK, BLUE)
         self.play(Transform(lGroup, P_final))
         self.wait(1)
 
-        #TODO OUTRO
+                # OUTRO
+        self.camera.frame.scale(1) 
+
+        # DOPLNIT "..." ZA VSECHNY KONECNE OBJEKTY
+        fin_group = VGroup(lGroup, formula_L0, formula_L1, sum_text, general_formula, dots, ax3, dot31, dot32, dot33, dot34, dot35, line_v1,line_v2,line_v3,line_v4,line_v5)
+        r_logo = Tex("R", font_size=144)
+        r_logo.set_fill(opacity=0)
+        r_logo.set_stroke(width=6, color=[TEAL, BLUE]).set_sheen_direction([1, 0, 0])
+        r_logo.move_to(self.camera.frame.get_center())
+
+
+        chan_name_r = Tex("R", font_size=50)
+        chan_name_r.set_fill(opacity=0)
+        chan_name_r.set_stroke(width=2)
+        chan_name = Tex("eal", font_size=40)
+        chan_name.next_to(chan_name_r, RIGHT, buff = 0)
+
+        chan_name_n = Tex("N", font_size=50)
+        chan_name_n.set_fill(opacity=0)
+        chan_name_n.set_stroke(width=2)
+        chan_name_n.next_to(chan_name, RIGHT, buff=0.2)
+        chan_name2 = Tex("umbers", font_size=40)
+        chan_name2.next_to(chan_name_n, RIGHT, buff = 0)
+
+        chan_name_text = VGroup(chan_name_r, chan_name, chan_name_n, chan_name2)
+        chan_name_text.next_to(r_logo, DOWN, buff = 0.2)
+        chan_name_text.set_color_by_gradient(TEAL, BLUE)
+
+
+        self.play(ReplacementTransform(fin_group, r_logo), run_time = 1.5)
+        self.play(Write(chan_name_text))
+        self.wait(1)
