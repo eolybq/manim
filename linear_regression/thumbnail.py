@@ -1,6 +1,6 @@
 from manim import *
 
-class LinearR(Scene):
+class LinearRThumbnail(Scene):
     def construct(self):
         f_size = 20
         config.frame_width = 9

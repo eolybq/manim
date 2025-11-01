@@ -2,6 +2,14 @@ from manim import *
 
 class LinearR(Scene):
     def construct(self):
+        # ---SHORTS POTREBUJI THUMBNAIL PRIMO VE VIDEU---
+        # img = ImageMobject("media/images/thumbnail/thumbnail.png")
+        # img.scale(0.6)
+        # self.add(img)
+        # self.wait(0.01)
+        # self.remove(img)
+
+
         f_size = 20
         config.frame_width = 9
 
