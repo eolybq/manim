@@ -206,8 +206,9 @@ class Lagrange(MovingCameraScene):
         self.play(Transform(lGroup, P_final))
         self.wait(1)
 
-                # OUTRO
-        self.camera.frame.scale(1) 
+        
+
+        # OUTRO
 
         # DOPLNIT "..." ZA VSECHNY KONECNE OBJEKTY
         fin_group = VGroup(lGroup, formula_L0, formula_L1, sum_text, general_formula, dots, ax3, dot31, dot32, dot33, dot34, dot35, line_v1,line_v2,line_v3,line_v4,line_v5)
@@ -215,6 +216,7 @@ class Lagrange(MovingCameraScene):
         r_logo.set_fill(opacity=0)
         r_logo.set_stroke(width=6, color=[TEAL, BLUE]).set_sheen_direction([1, 0, 0])
         r_logo.move_to(self.camera.frame.get_center())
+        r_logo.scale(2)
 
 
         chan_name_r = Tex("R", font_size=50)
@@ -231,6 +233,7 @@ class Lagrange(MovingCameraScene):
         chan_name2.next_to(chan_name_n, RIGHT, buff = 0)
 
         chan_name_text = VGroup(chan_name_r, chan_name, chan_name_n, chan_name2)
+        chan_name_text.scale(2)
         chan_name_text.next_to(r_logo, DOWN, buff = 0.2)
         chan_name_text.set_color_by_gradient(TEAL, BLUE)
 
