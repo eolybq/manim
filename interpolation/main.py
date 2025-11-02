@@ -32,23 +32,17 @@ class Lagrange(MovingCameraScene):
         # self.play(FadeOut(title))
         self.play(Unwrite(text_uvod))
 
-        self.play(Create(ax1), run_time=2)
+        self.play(Create(ax1),Write(text_im))
         dot1, dot2, dot3, dot4, dot5 = Dot(ax1.c2p(0,2), color=RED), Dot(ax1.c2p(1,0), color=YELLOW), Dot(ax1.c2p(2,2), color=PINK), Dot(ax1.c2p(3,1), color=GREEN), Dot(ax1.c2p(4,4), color=BLUE)
         self.play(Create(dot1),Create(dot2),Create(dot3), Create(dot4), Create(dot5))
         self.wait(1)
-
-        self.play(Write(text_im))
-        self.wait(0.2)
         self.play(FadeOut(text_im))
-        self.wait(1)
-
-        self.wait(1)
         polynom_showcase = ax1.plot(lambda x: 0.5833*x**4 - 4.6663*x**3 + 11.9154*x**2 - 9.8316*x + 1.9992, x_range=[0,4]).set_color_by_gradient(RED, PINK, BLUE)
         self.play(
             AnimationGroup(
                 Write(text_le),
                 Create(polynom_showcase),
-                lag_ratio=0.5
+                lag_ratio=0.1
             )
         )
         self.play(FadeOut(text_le))
@@ -136,8 +130,7 @@ class Lagrange(MovingCameraScene):
         ).set_color_by_gradient(BLUE,TEAL)
         ax3.move_to(self.camera.frame.get_center(), UP * 0.65)
 
-        self.play(Write(text_ex))
-        self.play(Create(ax3), run_time=2)
+        self.play(Write(text_ex), Create(ax3))
         dot31, dot32, dot33, dot34, dot35 = Dot(ax3.c2p(0,2), color=RED), Dot(ax3.c2p(1,0), color=YELLOW), Dot(ax3.c2p(2,2), color=PINK), Dot(ax3.c2p(3,1), color=GREEN), Dot(ax3.c2p(4,4), color=BLUE)
         self.play(Create(dot31),Create(dot32),Create(dot33), Create(dot34), Create(dot35))
         self.wait(1)
@@ -153,11 +146,10 @@ class Lagrange(MovingCameraScene):
         line_v5 = DashedLine(ax3.c2p(4, 0), ax3.c2p(4, 4), color=BLUE, dash_length=0.1)
 
         self.play(Create(line_v1), Create(line_v2), Create(line_v3),Create(line_v4), Create(line_v5))
-        self.wait(1)
 
         self.play(Write(text_div))
         self.play(Write(formula_L0))
-        self.wait(0.5)
+
         self.play(FadeOut(formula_L0_raw), FadeOut(text_div))
 
         self.play(formula_L0.animate.move_to(self.camera.frame.get_center() + UP*6), run_time=1)
@@ -165,7 +157,7 @@ class Lagrange(MovingCameraScene):
         L0_l = ax3.plot(L0, x_range=[0, 4.3], color=RED)
         self.play(Create(L0_l), FadeOut(L0_RAW))
 
-        self.wait(1)
+        self.wait(0.5)
 
         # Vzorec pro L1
         formula_L1 = MathTex(
@@ -173,13 +165,12 @@ class Lagrange(MovingCameraScene):
             font_size=40
         ).next_to(formula_L0, DOWN, buff=1.2)
         self.play(Write(formula_L1))
-        self.wait(0.5)
+        self.wait(0.3)
 
         # Tři vertikální tečky
         dots = MathTex(r"\vdots", font_size=36).next_to(formula_L1, DOWN, buff=0.5)
         self.play(Write(dots))
-        self.wait(0.5)
-
+        self.wait(0.3)
         # Text o součtu
         sum_text = Text("Now we sum them up to get the polynomial:", font_size=28).next_to(dots, DOWN, buff=0.8).set_color_by_gradient(RED, PINK, BLUE)
         self.play(Write(sum_text))
@@ -190,7 +181,7 @@ class Lagrange(MovingCameraScene):
             font_size=40
         ).next_to(sum_text, DOWN, buff=0.8)
         self.play(Write(general_formula))
-        self.wait(1)
+        self.wait(0.3)
 
         L1_l = ax3.plot(L1, x_range=[0, 4.3], color=YELLOW)
         L2_l = ax3.plot(L2, x_range=[0, 4.3], color=PINK)
@@ -200,13 +191,11 @@ class Lagrange(MovingCameraScene):
         lGroup = VGroup(L0_l, L1_l, L2_l, L3_l, L4_l)
 
         self.play(Create(L1_l),Create(L2_l),Create(L3_l),Create(L4_l))
-        self.wait(1)
+        self.wait(0.4)
 
         P_final = ax3.plot(P, x_range=[0,4.05]).set_color_by_gradient(RED, PINK, BLUE)
         self.play(Transform(lGroup, P_final))
-        self.wait(1)
-
-        
+        self.wait(0.4) 
 
         # OUTRO
 
