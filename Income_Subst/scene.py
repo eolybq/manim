@@ -6,10 +6,23 @@ config.pixel_height = 1920
 config.pixel_width = 1080
 
 
-class Mikro(MovingCameraScene):
+class IncomeSubst(MovingCameraScene):
     def construct(self):
         self.camera.frame_width = 9
         self.camera.frame_height = 16
+
+
+
+        intro_t = Tex("Income \\& Substitution Effect")
+        intro_t.set_color_by_gradient(TEAL, GREEN)
+        intro_t.scale(0.5)
+
+        self.play(Write(intro_t))
+        self.play(intro_t.animate.scale(1.5))
+        self.play(Unwrite(intro_t))
+
+
+
         ax = Axes(
             x_range=[0, 5, 1],
             y_range=[0, 5, 1],
@@ -17,12 +30,11 @@ class Mikro(MovingCameraScene):
             y_length=6,
             axis_config={"include_numbers": True},
         )
-        self.add(ax)
         x_label = ax.get_x_axis_label("x")
         y_label = ax.get_y_axis_label("y")
         x_label.next_to(ax.x_axis.get_end(), DOWN)
         y_label.next_to(ax.y_axis.get_end(), LEFT).shift(DOWN * 0.2)
-        self.add(x_label, y_label)
+        self.play(Write(ax), Write(x_label), Write(y_label))
         #ZAKLADNI PARAMETRY
         I = 2
         px = 1   
@@ -45,7 +57,7 @@ class Mikro(MovingCameraScene):
         optimum = Dot(ax.c2p(x_opt,y_opt))
         optimum.z_index = 10
 
-        self.add(budget_line,budget_line2, indifference_curve_initial, indifference_curve_old)
+        self.play(Create(budget_line),Create(budget_line2), Create(indifference_curve_initial), Create(indifference_curve_old))
         self.play(Create(optimum))
         
         # Text k původnímu optimu
@@ -115,4 +127,41 @@ class Mikro(MovingCameraScene):
         self.play(Create(optimum_new), indifference_curve_old.animate.set_stroke(ORANGE, opacity=0.5))
         self.play(GrowArrow(y_increase), GrowArrow(x_increase2))
 
+        self.wait(1)
+
+
+        
+
+        # OUTRO
+
+        # DOPLNIT "..." ZA VSECHNY KONECNE OBJEKTY
+        fin_group = VGroup(ax, x_label, y_label, budget_line, budget_line2, se_budget_line2, optimum, optimum2, indifference_curve_initial, indifference_curve_old, text4, optimum_new, y_decrease, x_increase, y_increase, x_increase2)
+        r_logo = Tex("R", font_size=144)
+        r_logo.set_fill(opacity=0)
+        r_logo.set_stroke(width=6, color=[TEAL, BLUE]).set_sheen_direction([1, 0, 0])
+        r_logo.move_to(ORIGIN)
+        r_logo.scale(2)
+
+
+        chan_name_r = Tex("R", font_size=50)
+        chan_name_r.set_fill(opacity=0)
+        chan_name_r.set_stroke(width=2)
+        chan_name = Tex("eal", font_size=40)
+        chan_name.next_to(chan_name_r, RIGHT, buff = 0)
+
+        chan_name_n = Tex("N", font_size=50)
+        chan_name_n.set_fill(opacity=0)
+        chan_name_n.set_stroke(width=2)
+        chan_name_n.next_to(chan_name, RIGHT, buff=0.2)
+        chan_name2 = Tex("umbers", font_size=40)
+        chan_name2.next_to(chan_name_n, RIGHT, buff = 0)
+
+        chan_name_text = VGroup(chan_name_r, chan_name, chan_name_n, chan_name2)
+        chan_name_text.scale(2)
+        chan_name_text.next_to(r_logo, DOWN, buff = 0.2)
+        chan_name_text.set_color_by_gradient(TEAL, BLUE)
+
+
+        self.play(ReplacementTransform(fin_group, r_logo), run_time = 1.5)
+        self.play(Write(chan_name_text))
         self.wait(1)
